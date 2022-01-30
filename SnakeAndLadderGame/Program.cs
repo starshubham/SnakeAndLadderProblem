@@ -2,14 +2,15 @@
 
 namespace SnakeAndLadderGame
 {
+    /* UC1:- Snake and Ladder game played with single player at start position 0
+     */
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Snake and Ladder Problem.");
-
-            SnakeAndLadder startPlay = new SnakeAndLadder(); // Calling Method
-            startPlay.PlayGame();//method PlaGame
+            Console.WriteLine("***Welcome To Snake and Ladder Gmae***");
+            int playerPosition = 0;
+            Console.WriteLine("Player Position: " + playerPosition);
         }
     }
 }
