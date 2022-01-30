@@ -8,8 +8,8 @@ namespace SnakeAndLadderGame
         {
             Console.WriteLine("Welcome to Snake and Ladder Problem.");
 
-            SnakeAndLadder StartPlay = new SnakeAndLadder();
-            StartPlay.PlayGame();
+            SnakeAndLadder StartPlay = new SnakeAndLadder(); // Calling Method
+            StartPlay.PlayGame();//method PlaGame
         }
     }
 }
