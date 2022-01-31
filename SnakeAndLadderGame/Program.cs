@@ -91,12 +91,64 @@ namespace SnakeAndLadderGame
                      - Note in case the player position go above 100, the player stays in the same previous 
                        position till the player gets the exact number that adds to 100
              */
+            //Console.WriteLine("Single Player mode: Starting position 0");
+            //Console.WriteLine("GAME START");
+            //Console.WriteLine();
+
+            ////Variables
+            //int position = 0;
+
+            ////creatting random object
+            //Random die = new Random();
+            //Random options = new Random();
+
+            //while (position < FINAL)
+            //{
+            //    int dice = die.Next(1, 7);
+            //    Console.WriteLine("The number on this die roll is: " + dice);
+            //    int opt = options.Next(0, 3);
+
+            //    if (opt == NO_PLAY)
+            //    {
+            //        Console.WriteLine("No play: Player in same position-- " + position);
+            //    }
+            //    else if (opt == LADDER)
+            //    {
+            //        position = position + dice;
+            //        if (position > 100)
+            //        {
+            //            Console.WriteLine("Try Again, throw exceeded 100!");
+            //            position = position - dice;
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("Ladder!!! new postion " + position);
+            //        }
+
+            //    }
+            //    else
+            //    {
+            //        position = position - dice;
+            //        Console.WriteLine("Snake!!! new position-- " + position);
+            //    }
+
+            //    if (position < 0)
+            //    {
+            //        position = 0;
+            //    }
+            //}
+
+
+            /* UC6:- Report the number of times the dice was played to win the game
+                     and also the position after every die role
+             */
             Console.WriteLine("Single Player mode: Starting position 0");
             Console.WriteLine("GAME START");
             Console.WriteLine();
 
             //Variables
             int position = 0;
+            int count = 0;
 
             //creatting random object
             Random die = new Random();
@@ -136,7 +188,11 @@ namespace SnakeAndLadderGame
                 {
                     position = 0;
                 }
+                Console.WriteLine("The position after the {0} die roll is {1} ", count, position);
+                count++;
             }
+            Console.WriteLine("The number of times the die thrown is: " + count);
+
         }
     }
 }
