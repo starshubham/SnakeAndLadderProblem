@@ -142,57 +142,128 @@ namespace SnakeAndLadderGame
             /* UC6:- Report the number of times the dice was played to win the game
                      and also the position after every die role
              */
-            Console.WriteLine("Single Player mode: Starting position 0");
-            Console.WriteLine("GAME START");
-            Console.WriteLine();
+            //Console.WriteLine("Single Player mode: Starting position 0");
+            //Console.WriteLine("GAME START");
+            //Console.WriteLine();
 
-            //Variables
-            int position = 0;
-            int count = 0;
+            ////Variables
+            //int position = 0;
+            //int count = 0;
 
-            //creatting random object
-            Random die = new Random();
-            Random options = new Random();
+            ////creatting random object
+            //Random die = new Random();
+            //Random options = new Random();
 
-            while (position < FINAL)
+            //while (position < FINAL)
+            //{
+            //    int dice = die.Next(1, 7);
+            //    Console.WriteLine("The number on this die roll is: " + dice);
+            //    int opt = options.Next(0, 3);
+
+            //    if (opt == NO_PLAY)
+            //    {
+            //        Console.WriteLine("No play: Player in same position-- " + position);
+            //    }
+            //    else if (opt == LADDER)
+            //    {
+            //        position = position + dice;
+            //        if (position > 100)
+            //        {
+            //            Console.WriteLine("Try Again, throw exceeded 100!");
+            //            position = position - dice;
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("Ladder!!! new postion " + position);
+            //        }
+
+            //    }
+            //    else
+            //    {
+            //        position = position - dice;
+            //        Console.WriteLine("Snake!!! new position-- " + position);
+            //    }
+
+            //    if (position < 0)
+            //    {
+            //        position = 0;
+            //    }
+            //    Console.WriteLine("The position after the {0} die roll is {1} ", count, position);
+            //    count++;
+            //}
+            //Console.WriteLine("The number of times the die thrown is: " + count);
+
+
+            /* UC7:- Play the game with 2 Player. In this case if a Player gets a Ladder then plays again.
+                     Finally report which Player won the game
+             */
+            int playerOnePosition = 0, playerTwoPosition = 0, winPosition = 100, countRound = 0;
+            RollDice roll = new RollDice();   //Creating an object of RollDice class. 
+
+            while (playerOnePosition != 100 && playerTwoPosition != 100)
             {
-                int dice = die.Next(1, 7);
-                Console.WriteLine("The number on this die roll is: " + dice);
-                int opt = options.Next(0, 3);
+                int playerOneDice = roll.rollDice();
+                int playerTwoDice = roll.rollDice();
+                int option = roll.checkOption();
+                countRound++;
+                switch (option)
+                {
+                    case 1:
+                        Console.WriteLine("Player Got Ladder.");
+                        playerOnePosition += playerOneDice;
+                        playerTwoPosition += playerTwoDice;
+                        int OneChance = roll.rollDice();
+                        playerOnePosition += playerOneDice; //If got ladder Rolling again
+                        int TwoChance = roll.rollDice();
+                        playerTwoPosition += playerTwoDice; //If got ladder Rolling again
+                        if (playerOnePosition > winPosition)
+                        {
+                            playerOnePosition -= playerOneDice;
+                        }
+                        else if (playerTwoPosition > winPosition)
+                        {
+                            playerTwoPosition -= playerTwoDice;
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine("Player got Snake.");
+                        if ((playerOnePosition - playerOneDice) < 0)
+                        {
+                            playerOnePosition = 0;
 
-                if (opt == NO_PLAY)
-                {
-                    Console.WriteLine("No play: Player in same position-- " + position);
+                        }
+                        else if ((playerTwoPosition - playerTwoDice) < 0)
+                        {
+                            playerTwoPosition = 0;
+                        }
+                        else
+                        {
+                            playerOnePosition -= playerOneDice;
+                            playerTwoPosition -= playerTwoDice;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Player not playing.");
+                        break;
                 }
-                else if (opt == LADDER)
+                Console.WriteLine($"Roll_Dice_Count:{ countRound } :Player_One_Position: {playerOnePosition}");
+                Console.WriteLine($"Roll_Dice_Count:{ countRound } :Player_Two_Position: {playerTwoPosition}");
+                if (playerOnePosition == winPosition || playerTwoPosition == winPosition)
                 {
-                    position = position + dice;
-                    if (position > 100)
+                    if (playerOnePosition == winPosition)
                     {
-                        Console.WriteLine("Try Again, throw exceeded 100!");
-                        position = position - dice;
+
+                        Console.WriteLine("----------Player_One_Won----------");
+                        Console.WriteLine("Number of times Player1 dice was played : {0}", countRound);
                     }
-                    else
+                    else if (playerTwoPosition == winPosition)
                     {
-                        Console.WriteLine("Ladder!!! new postion " + position);
+
+                        Console.WriteLine("----------Player_Two_Won----------");
+                        Console.WriteLine("Number of times Player2 dice was played : {0}", countRound);
                     }
-
                 }
-                else
-                {
-                    position = position - dice;
-                    Console.WriteLine("Snake!!! new position-- " + position);
-                }
-
-                if (position < 0)
-                {
-                    position = 0;
-                }
-                Console.WriteLine("The position after the {0} die roll is {1} ", count, position);
-                count++;
             }
-            Console.WriteLine("The number of times the die thrown is: " + count);
-
         }
     }
 }
